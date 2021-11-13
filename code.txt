@@ -1,0 +1,66 @@
+<?php
+include('db.php');
+$sql="SELECT * FROM `notehzm` ORDER BY id DESC";
+
+$rows=read($pdo,$sql);
+?>
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+        <title>贺子铭的记事本</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    
+    </head>
+
+    <body>
+        <div class='container'>
+            <form action="save.php" method='POST'>
+                    <div class="jumbotron">
+                        <h1 class="display-4"> 我的记事本</h1>
+                        <p class="lead">今天想要记什么？</p>
+                    </div>
+                <div class='row g-3 '>
+                    
+                
+                    <div class='col-lg-12'>
+                        <div class="form-group">
+                            <textarea  name='content' class='form-control'  placeholder="请输入要做的事情" rows='4'></textarea>
+                        </div>
+                    </div>
+
+                    <div class='col-lg-3'>
+                        <div class="form-group ">
+                            <input name='time' class='form-control' placeholder="请输入待完成时间" type='text'/>
+                        </div>
+                    </div>
+                    <div class='col-lg-9 d-flex'>
+                        <div class="form-group">
+                            <input class='btn btn-primary' type='submit' value='记得完成哦'/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            <div class='row'>
+                <div class='col-lg-12'>
+                    <?php
+                        foreach($rows as $key=>$notehzm){
+                    ?>
+                    
+                    
+                    <div class="border rounded p-2 mb-2">
+                        <div class='text-primary'><?php echo $notehzm['time']."    要做："; ?></div>
+                        <div><?php echo $notehzm['content']; ?></div>
+                    </div>
+                    <?php
+                        }
+                     ?>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
